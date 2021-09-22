@@ -9,6 +9,7 @@ import org.apache.spark.sql.cassandra._
 import com.datastax.spark.connector.cql.CassandraConnectorConf
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.expressions.Window
+import com.datastax.spark.connector.cql.CassandraConnector
 
 object spark3yb {
 
@@ -85,9 +86,9 @@ df_yb.withColumn("rank",rank().over(windowSpec)).show()
    .cassandraFormat("employees_json_copy", "test")
    .mode("overwrite")
    .save()
+ 
 //To verify
 val sqlDF = spark.sql("SELECT * FROM ybcatalog.test.employees_json_copy").show(false)
-
 
 //Native support of Json:
 val df = spark.sql("SELECT * FROM ybcatalog.test.employees_json WHERE get_json_object(phone, '$.phone') = 1200");
@@ -96,10 +97,10 @@ df.show
 //Using JSONB Column Pruning
 val query = "SELECT department_id, employee_id, get_json_object(phone, '$.code') as code FROM ybcatalog.test.employees_json WHERE get_json_string(phone, '$.key(1)') = '1400' order by department_id limit 2";
 val df_sel1=spark.sql(query)
-Df_sel.explain
+df_sel1.explain
 
 //Predicate pushed down	   	   
-val query = "SELECT department_id, employee_id, get_json_object(phone, '$.key[1].m[2].b') as key FROM ybcatalog.test.employees_json WHERE get_json_string(phone, '$.key[1].m[2].b') = '1400' order by department_id limit 2";
+val query = "SELECT department_id, employee_id, get_json_object(phone, '$.key[1].m[2].b') as key FROM ybcatalog.test.employees_json WHERE get_json_string(phone, '$.key[1].m[2].b') = '400' order by department_id limit 2";
 
 val df_sel2 = spark.sql(query)
 df_sel2.show()
