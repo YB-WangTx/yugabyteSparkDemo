@@ -36,7 +36,7 @@ Diagram
 - Apache Spark and YugabyteDB Spark Connector: Key differentiators
 - Hands-on Workshop
 
-
+## Hands-on Workshop
 - Check Java version: 1.8 required
  - java -version
 - Create a free cluster from Yugabyte cloud
