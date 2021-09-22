@@ -37,8 +37,7 @@ Diagram
 - Hands-on Workshop
 
 ## Hands-on Workshop
-- Check Java version: 1.8 required
- - java -version
+- Check Java version: 1.8 required - java -version
 - Create a free cluster from Yugabyte cloud
   - Install Yugabyte client shell
     cd /Users/weiwang
@@ -91,7 +90,7 @@ Diagram
  val spark = SparkSession.builder().config(conf).config("spark.cassandra.connection.host", host).config("spark.cassandra.connection.port", "9042").config("spark.cassandra.connection.ssl.clientAuth.enabled", true).config("spark.cassandra.auth.username", user).config("spark.cassandra.auth.password", password).config("spark.cassandra.connection.ssl.enabled", true).config("spark.cassandra.connection.ssl.trustStore.type", "jks").config("spark.cassandra.connection.ssl.trustStore.path", keyStore).config("spark.cassandra.connection.ssl.trustStore.password", "ybcloud").withExtensions(new CassandraSparkExtensions).getOrCreate()
 
 -  Read from YCQL table
-  val df_yb = spark.read.table("ybcatalog.test.employees_json")
+   val df_yb = spark.read.table("ybcatalog.test.employees_json")
 
 -  Perform ETL
   val windowSpec  = Window.partitionBy("department_id").orderBy("salary")
