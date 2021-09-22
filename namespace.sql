@@ -1,6 +1,8 @@
- //Create namesapce
- Create namespace test;
+ //Create keysapce
+ Create keyspace test;
+ desc keyspaces;
  Use test;
+ desc tables;
  
  //Create employees_json
  CREATE TABLE employees_json
@@ -28,6 +30,7 @@ INSERT INTO employees_json(department_id, employee_id, dept_name, salary, phone)
 INSERT INTO employees_json(department_id, employee_id, dept_name, salary, phone) VALUES (3, 5, 'HR', 30000,'{"code":"+1","phone":5172505400}');
 INSERT INTO employees_json(department_id, employee_id, dept_name, salary, phone) VALUES (1, 6, 'Sales', 50000,  '{"code":"+44","phone":1400}');
 INSERT INTO employees_json(department_id, employee_id, dept_name, salary, phone) VALUES (3, 7, 'HR', 52000,  '{"code":"+44","phone":1200}');
+INSERT INTO employees_json_index(department_id, employee_id, dept_name, salary, phone) VALUES (3, 7, 'HR', 6000,  '{"code":"+44","phone":1200,"key":[0,"m":[12, -1, "b":400,500]}');
 
 //Create a table with uniqque secondary index
 CREATE TABLE employees_json_index
