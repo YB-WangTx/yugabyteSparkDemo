@@ -31,6 +31,7 @@ val conf = new SparkConf()
     .set("spark.sql.catalog.ybcatalog", "com.datastax.spark.connector.datasource.CassandraCatalog")
     .set("spark.sql.extensions", "com.datastax.spark.connector.CassandraSparkExtensions")
 
+//Spark session
 val spark = SparkSession
       .builder()
       .config(conf)
@@ -45,6 +46,10 @@ val spark = SparkSession
       .config("spark.cassandra.connection.ssl.trustStore.password", "ybcloud")
       .withExtensions(new CassandraSparkExtensions)
       .getOrCreate()
+
+//to execute this one instead to avoid possible syntax errors 
+val spark = SparkSession.builder().config(conf).config("spark.cassandra.connection.host", host).config("spark.cassandra.connection.port", "9042").config("spark.cassandra.connection.ssl.clientAuth.enabled", true).config("spark.cassandra.auth.username", user).config("spark.cassandra.auth.password", password).config("spark.cassandra.connection.ssl.enabled", true).config("spark.cassandra.connection.ssl.trustStore.type", "jks").config("spark.cassandra.connection.ssl.trustStore.path", keyStore).config("spark.cassandra.connection.ssl.trustStore.password", "ybcloud").withExtensions(new CassandraSparkExtensions).getOrCreate()
+
 
  //example with Spark.sql
 runReadWriteSqlExample(spark)
