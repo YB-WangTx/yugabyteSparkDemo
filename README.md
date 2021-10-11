@@ -58,8 +58,9 @@ Diagram
     SSL_CERTFILE=/Users/weiwang/Downloads/root.crt $YUGABYTE_HOME/bin/ycqlsh 748fdee2-aabe-4d75-a698-a6514e0b19ff.aws.ybdb.io 9042 -u admin --ssl
     ```
   -  Create keyspace, tables and insert testing data
-    namespace.sql
-
+    ```
+    ./bin/ycqlsh -h 127.0.0.1 -f namespace.sql
+    ```
 #### Step 2: Install Spark 3.0 and invoke Spark shell with Yugabyte Spark Connector
   ```
     wget https://dlcdn.apache.org/spark/spark-3.0.3/spark-3.0.3-bin-hadoop2.7.tgz
