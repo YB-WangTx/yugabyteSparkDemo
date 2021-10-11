@@ -1,4 +1,4 @@
-# yugabyte-spark-workshop
+# Yugabyte-spark-workshop
 Hands-on workshop to build apps using Yugabyte and Spark 3.x
 
 ## Prerequisites
@@ -20,7 +20,7 @@ Hands-on workshop to build apps using Yugabyte and Spark 3.x
 - Internet access - ability to access sites via port 80 and 443 (HTTPS)
 - Yugabyte Spark Cassandra connector: 3.0-yb-8 https://mvnrepository.com/artifact/com.yugabyte.spark/spark-cassandra-connector
 
-### What will we build in this workshop?
+## What will we build in this workshop?
 Diagram
 
 - A Spark application with Yugabyte Spark connector to interact with Yugabye cloud to demonstrate how Yugabyte suppports Json data natively
@@ -37,28 +37,42 @@ Diagram
 - Hands-on Workshop
 
 ## Hands-on Workshop
-- Check Java version: 1.8 required - java -version
-- Create a free cluster from Yugabyte cloud
-  - Install Yugabyte client shell
-    cd /Users/weiwang
+
+### Build an application
+
+#### Create a YugabyteDB cluster from Yugabyte cloud and create database objects
+
+ Step 1: Create a free cluster: https://www.yugabyte.com/cloud/
+ Step 2: Install Yugabyte client shell
+    ```
+    cd /Users/xxx
     curl -sSL https://downloads.yugabyte.com/get_clients.sh | bash
-    export YUGABYTE_HOME=/Users/weiwang/yugabyte-client-2.6
-  - Download certficate to ~/Downloads directory: root.crt
-  - Create truststore
+    export YUGABYTE_HOME=/Users/xxx/yugabyte-client-2.6
+    ```
+  Step 3: Download the certficate to ~/Downloads directory: root.crt
+  Step 4: Create truststore
+    ```
     keytool -keystore yb-keystore.jks -storetype 'jks' -importcert -file root.crt -keypass 'ybcloud' -storepass 'ybcloud' -alias ~/Documents/spark3yb/root_crt  -noprompt
     keytool -list -keystore yb-keystore.jks -storepass ybcloud
-  - Connect to the cluster
+    ```
+  Step 5: Connect to the cluster
+    ```
     SSL_CERTFILE=/Users/weiwang/Downloads/root.crt $YUGABYTE_HOME/bin/ycqlsh 748fdee2-aabe-4d75-a698-a6514e0b19ff.aws.ybdb.io 9042 -u admin --ssl
-  - Create keyspace, tables and insert testing data
+    ```
+  Sgtep 6: Create keyspace, tables and insert testing data
     namespace.sql
-- Install Spark 3.0 as needed
-  - Download Spark 3.0
+
+#### Install Spark 3.0 as needed
+  Step 1: Download Spark 3.0
+    ```
     wget https://dlcdn.apache.org/spark/spark-3.0.3/spark-3.0.3-bin-hadoop2.7.tgz
     tar xvf spark-3.0.3-bin-hadoop2.7.tgz
     cd spark-3.0.3-bin-hadoop2.7
-  - Invoke Spark shell with Yugabyte Spark connector
-    ./bin/spark-shell --conf spark.cassandra.connection.host=127.0.0.1 --conf spark.sql.extensions=com.datastax.spark.connector.CassandraSparkExtensions --packages com.yugabyte.spark:spark-cassandra-connector_2.12:3.0-yb-8
-
+    - Invoke Spark shell with Yugabyte Spark connector
+    ./bin/spark-shell --conf spark.cassandra.connection.host=127.0.0.1 
+                      --conf spark.sql.extensions=com.datastax.spark.connector.CassandraSparkExtensions 
+                      --packages com.yugabyte.spark:spark-cassandra-connector_2.12:3.0-yb-8
+    ```
 ### Build an application
 
 Step 1: Import required libriaris
