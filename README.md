@@ -50,7 +50,7 @@ Diagram
     export YUGABYTE_HOME=/Users/xxx/yugabyte-client-2.6
     ```
  3. Download the certficate to ~/Downloads directory: root.crt
- 4. Create truststore
+ 4. Create a truststore
     ```
     keytool -keystore yb-keystore.jks -storetype 'jks' -importcert -file root.crt -keypass 'ybcloud' -storepass 'ybcloud' -alias ~/Documents/spark3yb/root_crt  -noprompt
     keytool -list -keystore yb-keystore.jks -storepass ybcloud
@@ -127,19 +127,23 @@ Diagram
              .getOrCreate()
 ```
 5. Read from YCQL table
+```
    val df_yb = spark.read.table("ybcatalog.test.employees_json")
-
-6. Perform ETL
+```
+6. Perform ETL: Windowing
+```
   val windowSpec  = Window.partitionBy("department_id").orderBy("salary")
   df_yb.withColumn("row_number",row_number.over(windowSpec)).show(false)
   df_yb.withColumn("rank",rank().over(windowSpec)).show(false)
-
+```
 7. Write back to YCQL table
 ```
   df_yb.write.cassandraFormat("employees_json_copy", "test")
              .mode("append")
              .save()
+ ```
 8. To verify the result
+```
   val sqlDF = spark.sql("SELECT * FROM ybcatalog.test.employees_json_copy order by department_id").show(false)
  ```
 9.  Native Jsonb support demo using JSONB Column Pruning
