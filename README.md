@@ -60,6 +60,8 @@ Diagram
     ./bin/spark-shell --conf spark.cassandra.connection.host=127.0.0.1 --conf spark.sql.extensions=com.datastax.spark.connector.CassandraSparkExtensions --packages com.yugabyte.spark:spark-cassandra-connector_2.12:3.0-yb-8
 
 ### Build an application
+
+Step 1: Import required libriaris
    ```
    import org.apache.spark.{SparkConf, SparkContext}
    import org.apache.spark.sql.SparkSession
@@ -72,7 +74,7 @@ Diagram
    import org.apache.spark.sql.expressions.Window
    import com.datastax.spark.connector.cql.CassandraConnector
    ```
- #### YB cloud connectivity info
+ Step 2: Define YB cloud connectivity information
    ```
    val host = "748fdee2-aabe-4d75-a698-a6514e0b19ff.aws.ybdb.io"
    val keyspace = "test"
