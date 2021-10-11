@@ -61,6 +61,7 @@ Diagram
     
 - Build an application
  - import libraires
+   ```
    import org.apache.spark.{SparkConf, SparkContext}
    import org.apache.spark.sql.SparkSession
    import org.apache.spark.sql.Row
@@ -71,15 +72,16 @@ Diagram
    import org.apache.spark.sql.functions._
    import org.apache.spark.sql.expressions.Window
    import com.datastax.spark.connector.cql.CassandraConnector
-   
+   ```
  - YB CLoud connectivity info
+   ```
    val host = "748fdee2-aabe-4d75-a698-a6514e0b19ff.aws.ybdb.io"
    val keyspace = "test"
    val table = "employees_json"
    val user = "admin"
    val password = "your password for admin"
    val keyStore ="/Users/weiwang/Documents/spark3yb/yb-keystore.jks"
-
+   ```
  - Create Spark conf
    val conf = new SparkConf().setAppName("yb.spark-jsonb").setMaster("local[1]").set("spark.cassandra.connection.localDC", "us-east   2").set("spark.cassandra.connection.host", "127.0.0.1").set("spark.sql.catalog.ybcatalog",
 "com.datastax.spark.connector.datasource.CassandraCatalog").set("spark.sql.extensions", "com.datastax.spark.connector.CassandraSparkExtensions")
