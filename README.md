@@ -146,7 +146,7 @@ Diagram
 ```
   val sqlDF = spark.sql("SELECT * FROM ybcatalog.test.employees_json_copy order by department_id").show(false)
  ```
-9.  Native Jsonb support demo using JSONB Column Pruning
+9.  Native Jsonb support using JSONB Column Pruning
 ```
 val query = "SELECT department_id, employee_id, get_json_object(phone, '$.code') as code 
              FROM ybcatalog.test.employees_json WHERE get_json_string(phone, '$.key(1)') = '1400' 
