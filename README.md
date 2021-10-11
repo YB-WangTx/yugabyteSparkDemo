@@ -1,5 +1,5 @@
 # Yugabyte-Spark-Workshop
-Hands-on workshop to build apps using YugabyteDB and Spark 3.x
+Hands-on workshop to build apps using Yugabyte cloud and Spark 3.x
 
 ## Prerequisites
 
