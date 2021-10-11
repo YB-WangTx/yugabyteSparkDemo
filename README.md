@@ -58,6 +58,7 @@ Diagram
     SSL_CERTFILE=/Users/weiwang/Downloads/root.crt $YUGABYTE_HOME/bin/ycqlsh 748fdee2-aabe-4d75-a698-a6514e0b19ff.aws.ybdb.io 9042 -u admin --ssl
     ```
   -  Create keyspace, tables and insert testing data
+
     ```
     ./bin/ycqlsh -h 127.0.0.1 -f namespace.sql
     ```
