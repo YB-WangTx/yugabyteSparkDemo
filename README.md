@@ -73,7 +73,7 @@ Diagram
    import org.apache.spark.sql.expressions.Window
    import com.datastax.spark.connector.cql.CassandraConnector
    ```
- - YB CLoud connectivity info
+ - YB cloud connectivity info
    ```
    val host = "748fdee2-aabe-4d75-a698-a6514e0b19ff.aws.ybdb.io"
    val keyspace = "test"
@@ -83,12 +83,14 @@ Diagram
    val keyStore ="/Users/weiwang/Documents/spark3yb/yb-keystore.jks"
    ```
  - Create Spark conf
+ ```
    val conf = new SparkConf().setAppName("yb.spark-jsonb").setMaster("local[1]").set("spark.cassandra.connection.localDC", "us-east   2").set("spark.cassandra.connection.host", "127.0.0.1").set("spark.sql.catalog.ybcatalog",
 "com.datastax.spark.connector.datasource.CassandraCatalog").set("spark.sql.extensions", "com.datastax.spark.connector.CassandraSparkExtensions")
-
+```
 -  Create Spark session
+```
  val spark = SparkSession.builder().config(conf).config("spark.cassandra.connection.host", host).config("spark.cassandra.connection.port", "9042").config("spark.cassandra.connection.ssl.clientAuth.enabled", true).config("spark.cassandra.auth.username", user).config("spark.cassandra.auth.password", password).config("spark.cassandra.connection.ssl.enabled", true).config("spark.cassandra.connection.ssl.trustStore.type", "jks").config("spark.cassandra.connection.ssl.trustStore.path", keyStore).config("spark.cassandra.connection.ssl.trustStore.password", "ybcloud").withExtensions(new CassandraSparkExtensions).getOrCreate()
-
+```
 -  Read from YCQL table
    val df_yb = spark.read.table("ybcatalog.test.employees_json")
 
