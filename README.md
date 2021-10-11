@@ -61,16 +61,14 @@ Diagram
     namespace.sql
 
 #### Step 2: Install Spark 3.0 and invoke Spark shell with Yugabyte Spark Connector
-
-    ```
+  ```
     wget https://dlcdn.apache.org/spark/spark-3.0.3/spark-3.0.3-bin-hadoop2.7.tgz
     tar xvf spark-3.0.3-bin-hadoop2.7.tgz
     cd spark-3.0.3-bin-hadoop2.7
     ./bin/spark-shell --conf spark.cassandra.connection.host=127.0.0.1 
                       --conf spark.sql.extensions=com.datastax.spark.connector.CassandraSparkExtensions 
                       --packages com.yugabyte.spark:spark-cassandra-connector_2.12:3.0-yb-8
-    ```
-
+   ```
 #### Step 3: Building the application
   -  Import libraries
    ```
